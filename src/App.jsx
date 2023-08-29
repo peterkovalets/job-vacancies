@@ -5,6 +5,8 @@ import SpinnerFullPage from './ui/SpinnerFullPage';
 
 const AppLayout = lazy(() => import('./ui/AppLayout'));
 const Vacancies = lazy(() => import('./pages/Vacancies'));
+const AddVacancy = lazy(() => import('./pages/AddVacancy'));
+const PageNotFound = lazy(() => import('./pages/PageNotFound'));
 
 function App() {
   return (
@@ -16,7 +18,9 @@ function App() {
             <Route element={<AppLayout />}>
               <Route index element={<Navigate to="/vacancies" replace />} />
               <Route path="vacancies" element={<Vacancies />} />
+              <Route path="add-vacancy" element={<AddVacancy />} />
             </Route>
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
         </Suspense>
       </BrowserRouter>

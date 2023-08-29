@@ -33,7 +33,7 @@ function MainNav() {
           <Link to="/vacancies">Все вакансии</Link>
         </Item>
         <Item>
-          <Link to="/vacancies/new">Создать вакансию</Link>
+          <Link to="/add-vacancy">Создать вакансию</Link>
         </Item>
       </List>
     </nav>
