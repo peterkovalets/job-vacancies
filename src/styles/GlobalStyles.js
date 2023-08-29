@@ -25,6 +25,9 @@ const GlobalStyles = createGlobalStyle`
     --color-gray-800: #1f2937;
     --color-gray-900: #111827;
 
+    --color-red-600: #dc2626;
+    --color-red-700: #b91c1c;
+
     --border-radius-tiny: 3px;
     --border-radius-sm: 5px;
     --border-radius-md: 7px;
@@ -37,6 +40,7 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    transition: background-color 0.3s, border 0.3s;
   }
 
   html {
@@ -63,6 +67,15 @@ const GlobalStyles = createGlobalStyle`
 
   ul {
     list-style: none;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  button,
+  input {
+    font: inherit;
   }
 `;
 

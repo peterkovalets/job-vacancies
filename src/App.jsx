@@ -1,5 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import GlobalStyles from './styles/GlobalStyles';
 import SpinnerFullPage from './ui/SpinnerFullPage';
 
@@ -8,9 +10,19 @@ const Vacancies = lazy(() => import('./pages/Vacancies'));
 const AddVacancy = lazy(() => import('./pages/AddVacancy'));
 const PageNotFound = lazy(() => import('./pages/PageNotFound'));
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 0,
+    },
+  },
+});
+
 function App() {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+
       <GlobalStyles />
       <BrowserRouter>
         <Suspense fallback={<SpinnerFullPage />}>
@@ -24,7 +36,7 @@ function App() {
           </Routes>
         </Suspense>
       </BrowserRouter>
-    </>
+    </QueryClientProvider>
   );
 }
 
