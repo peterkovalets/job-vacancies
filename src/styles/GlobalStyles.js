@@ -44,6 +44,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
+    background-color: var(--color-gray-100);
     color: var(--color-gray-700);
     font-family: 'Open Sans', sans-serif;
     font-size: 1.6rem;
@@ -58,6 +59,10 @@ const GlobalStyles = createGlobalStyle`
   h5,
   h6 {
     font-weight: 600;
+  }
+
+  ul {
+    list-style: none;
   }
 `;
 
