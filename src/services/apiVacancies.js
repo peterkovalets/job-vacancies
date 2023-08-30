@@ -1,6 +1,10 @@
 import axios from './axios';
 
 export async function getVacancies() {
-  const { data } = await axios.get('/ads');
-  return data;
+  try {
+    const { data } = await axios.get('/ads');
+    return data;
+  } catch {
+    throw new Error('Не удалось получить вакансии');
+  }
 }

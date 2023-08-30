@@ -2,6 +2,7 @@ import { styled } from 'styled-components';
 import Empty from '../../ui/Empty';
 import Spinner from '../../ui/Spinner';
 import VacancyItem from './VacancyItem';
+import Error from '../../ui/Error';
 import { useVacancies } from './useVacancies';
 
 const StyledVacancyList = styled.ul`
@@ -11,9 +12,11 @@ const StyledVacancyList = styled.ul`
 `;
 
 function VacancyList() {
-  const { vacancies, isLoading } = useVacancies();
+  const { vacancies, isLoading, error } = useVacancies();
 
   if (isLoading) return <Spinner />;
+
+  if (error) return <Error>{error.message}</Error>;
 
   if (vacancies.length === 0) return <Empty resourceName="Вакансий" />;
 
