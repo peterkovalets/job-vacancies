@@ -4,6 +4,7 @@ import Button from '../../ui/Button';
 import Form from '../../ui/Form';
 import FormRow from '../../ui/FormRow';
 import Input from '../../ui/Input';
+import { useCreateVacancy } from './useCreateVacancy';
 
 const Buttons = styled.div`
   display: flex;
@@ -12,11 +13,14 @@ const Buttons = styled.div`
 `;
 
 function AddVacancyForm() {
+  const { createVacancy, isCreating } = useCreateVacancy();
   const { register, handleSubmit, reset, formState } = useForm();
   const { errors } = formState;
 
   function onSubmit(data) {
-    console.log(data);
+    createVacancy(data, {
+      onSettled: () => reset(),
+    });
   }
 
   return (
@@ -24,6 +28,7 @@ function AddVacancyForm() {
       <FormRow label="Название компании" error={errors?.companyName?.message}>
         <Input
           id="companyName"
+          disabled={isCreating}
           {...register('companyName', {
             required: 'Это поле обязательное для заполнения',
           })}
@@ -34,6 +39,7 @@ function AddVacancyForm() {
           as="textarea"
           rows="10"
           id="body"
+          disabled={isCreating}
           {...register('body', {
             required: 'Это поле обязательное для заполнения',
           })}
@@ -45,16 +51,24 @@ function AddVacancyForm() {
       >
         <Input
           id="contact"
+          disabled={isCreating}
           {...register('contact', {
             required: 'Это поле обязательное для заполнения',
           })}
         />
       </FormRow>
       <Buttons>
-        <Button variant="outline" type="reset" onClick={reset}>
+        <Button
+          variant="outline"
+          type="reset"
+          onClick={reset}
+          disabled={isCreating}
+        >
           Очистить
         </Button>
-        <Button type="submit">Создать</Button>
+        <Button type="submit" disabled={isCreating}>
+          Создать
+        </Button>
       </Buttons>
     </Form>
   );

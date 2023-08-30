@@ -57,6 +57,10 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 400;
   }
 
+  *:disabled {
+    cursor: not-allowed;
+  }
+
   h1,
   h2,
   h3,

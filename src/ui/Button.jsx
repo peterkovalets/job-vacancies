@@ -15,7 +15,7 @@ const variants = {
     background-color: var(--color-brand-600);
     border: 1px solid var(--color-brand-700);
 
-    &:hover {
+    &:hover:not(:disabled) {
       background-color: var(--color-brand-700);
     }
   `,
@@ -27,7 +27,7 @@ const variants = {
       background-color 0.3s,
       color 0.3s;
 
-    &:hover {
+    &:hover:not(:disabled) {
       background-color: var(--color-gray-500);
       color: var(--color-gray-0);
     }
@@ -36,7 +36,7 @@ const variants = {
     background-color: var(--color-red-600);
     border: 1px solid var(--color-red-700);
 
-    &:hover {
+    &:hover:not(:disabled) {
       background-color: var(--color-red-700);
     }
   `,
@@ -51,6 +51,10 @@ const Button = styled.button`
 
   ${(props) => sizes[props.size]}
   ${(props) => variants[props.variant]}
+
+  &:disabled {
+    opacity: 0.7;
+  }
 `;
 
 Button.defaultProps = {
