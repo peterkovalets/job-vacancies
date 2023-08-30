@@ -17,3 +17,12 @@ export async function createVacancy(newVacancy) {
     throw new Error('Не удалось создать вакансию');
   }
 }
+
+export async function deleteVacancy(id) {
+  try {
+    const data = await axios.delete(`/ads/${id}/delete`);
+    return data;
+  } catch {
+    throw new Error('Не удалось удалить вакансию');
+  }
+}

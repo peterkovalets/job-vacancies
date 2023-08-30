@@ -6,6 +6,7 @@ const Input = styled.input`
   color: var(--color-gray-800);
   font-size: 2rem;
   border: 1px solid var(--color-gray-300);
+  border-radius: var(--border-radius-sm);
   resize: none;
 
   &:disabled {

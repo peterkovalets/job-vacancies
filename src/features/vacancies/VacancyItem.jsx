@@ -1,7 +1,9 @@
 import { styled } from 'styled-components';
-import { Link } from 'react-router-dom';
 import Button from '../../ui/Button';
 import TextExpander from '../../ui/TextExpander';
+import Modal from '../../ui/Modal';
+import ConfirmDelete from '../../ui/ConfirmDelete';
+import { useDeleteVacancy } from './useDeleteVacancy';
 
 const StyledVacancyItem = styled.li`
   padding: 1.6rem 3.2rem;
@@ -25,13 +27,8 @@ const Contact = styled.address`
   font-style: normal;
 `;
 
-const Buttons = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-`;
-
 function VacancyItem({ vacancy }) {
+  const { deleteVacancy, isDeleting } = useDeleteVacancy();
   const { id, companyName, body, contact } = vacancy;
 
   return (
@@ -41,14 +38,29 @@ function VacancyItem({ vacancy }) {
         <TextExpander collapsedNumWords={50}>{body}</TextExpander>
         <Contact>{contact}</Contact>
       </ItemContent>
-      <Buttons>
-        <Button size="small" as={Link} to={`/vacancies/${id}`}>
-          Подробнее
-        </Button>
-        <Button size="small" variant="danger">
-          Удалить
-        </Button>
-      </Buttons>
+      {/* <Button
+        size="small"
+        variant="danger"
+        onClick={}
+        disabled={isDeleting}
+        >
+        Удалить
+      </Button> */}
+      <Modal>
+        <Modal.Open opens="delete">
+          <Button size="small" variant="danger" disabled={isDeleting}>
+            Удалить
+          </Button>
+        </Modal.Open>
+
+        <Modal.Window name="delete">
+          <ConfirmDelete
+            resourceName={companyName}
+            onConfirm={() => deleteVacancy(id)}
+            disabled={isDeleting}
+          />
+        </Modal.Window>
+      </Modal>
     </StyledVacancyItem>
   );
 }
