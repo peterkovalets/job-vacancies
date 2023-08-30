@@ -21,10 +21,14 @@ const ItemContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
-`;
 
-const Contact = styled.address`
-  font-style: normal;
+  & p {
+    white-space: pre-line;
+  }
+
+  & address {
+    font-style: normal;
+  }
 `;
 
 function VacancyItem({ vacancy }) {
@@ -36,16 +40,8 @@ function VacancyItem({ vacancy }) {
       <ItemContent>
         <h3>{companyName}</h3>
         <TextExpander collapsedNumWords={50}>{body}</TextExpander>
-        <Contact>{contact}</Contact>
+        <address>{contact}</address>
       </ItemContent>
-      {/* <Button
-        size="small"
-        variant="danger"
-        onClick={}
-        disabled={isDeleting}
-        >
-        Удалить
-      </Button> */}
       <Modal>
         <Modal.Open opens="delete">
           <Button size="small" variant="danger" disabled={isDeleting}>
