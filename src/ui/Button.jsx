@@ -13,15 +13,28 @@ const sizes = {
 const variants = {
   primary: css`
     background-color: var(--color-brand-600);
-    border: 2px solid var(--color-brand-700);
+    border: 1px solid var(--color-brand-700);
 
     &:hover {
       background-color: var(--color-brand-700);
     }
   `,
+  outline: css`
+    background-color: transparent;
+    color: var(--color-gray-500);
+    border: 1px solid var(--color-gray-500);
+    transition:
+      background-color 0.3s,
+      color 0.3s;
+
+    &:hover {
+      background-color: var(--color-gray-500);
+      color: var(--color-gray-0);
+    }
+  `,
   danger: css`
     background-color: var(--color-red-600);
-    border: 2px solid var(--color-red-700);
+    border: 1px solid var(--color-red-700);
 
     &:hover {
       background-color: var(--color-red-700);

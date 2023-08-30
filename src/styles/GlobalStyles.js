@@ -74,8 +74,10 @@ const GlobalStyles = createGlobalStyle`
   }
 
   button,
-  input {
+  input,
+  textarea {
     font: inherit;
+    color: inherit;
   }
 `;
 

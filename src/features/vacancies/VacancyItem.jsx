@@ -6,7 +6,7 @@ import TextExpander from '../../ui/TextExpander';
 const StyledVacancyItem = styled.li`
   padding: 1.6rem 3.2rem;
   background-color: var(--color-gray-0);
-  border: 2px solid var(--color-gray-200);
+  border: 1px solid var(--color-gray-200);
   border-radius: var(--border-radius-sm);
 
   display: flex;
