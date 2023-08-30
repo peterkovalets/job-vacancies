@@ -2,9 +2,10 @@ import { cloneElement, createContext, useContext, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { styled } from 'styled-components';
 import { HiXMark } from 'react-icons/hi2';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useOutsideClick } from '../hooks/useOutsideClick';
 
-const StyledModal = styled.div`
+const StyledModal = styled(motion.div)`
   position: relative;
   margin: 0 1.5rem;
   padding: 4rem;
@@ -15,7 +16,7 @@ const StyledModal = styled.div`
   box-shadow: var(--shadow-lg);
 `;
 
-const Overlay = styled.div`
+const Overlay = styled(motion.div)`
   position: fixed;
   left: 0;
   top: 0;
@@ -77,18 +78,38 @@ function Window({ children, name }) {
   const { openName, close } = useContext(ModalContext);
   const { ref } = useOutsideClick(close);
 
-  if (openName !== name) return null;
-
   return createPortal(
-    <Overlay>
-      <StyledModal ref={ref}>
-        <Close onClick={close}>
-          <HiXMark />
-        </Close>
+    <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
+      {openName === name ? (
+        <Overlay
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <StyledModal
+            ref={ref}
+            initial={{ y: '-100vh', opacity: 0 }}
+            animate={{
+              y: '0',
+              opacity: 1,
+              transition: {
+                duration: 0.1,
+                type: 'spring',
+                damping: 50,
+                stiffness: 500,
+              },
+            }}
+            exit={{ y: '100vh' }}
+          >
+            <Close onClick={close}>
+              <HiXMark />
+            </Close>
 
-        <div>{cloneElement(children, { closeModal: close })}</div>
-      </StyledModal>
-    </Overlay>,
+            <div>{cloneElement(children, { closeModal: close })}</div>
+          </StyledModal>
+        </Overlay>
+      ) : null}
+    </AnimatePresence>,
     document.body,
   );
 }
